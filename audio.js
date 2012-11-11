@@ -22,8 +22,8 @@ function init() {
 
 function finishedLoading(bufferList) {
   // Combining key presses with decoded audio files into a map
-  for (var i = 0; i < bufferList.length; i++) {
-    if (i < characters.length) characterMap[characters[i]] = bufferList[i];
+  for (var i = 0; i < characters.length; i++) {
+    characterMap[characters[i]] = bufferList[i%bufferList.length];
   }
   // When a key is pressed, play music!
   document.onkeypress = playMusic
