@@ -1,1 +1,0 @@
-var notes = ["/~rectorky/stupid_weekly_projects/week1/notes/test3.mp3","/~rectorky/stupid_weekly_projects/week1/notes/test4.mp3","/~rectorky/stupid_weekly_projects/week1/notes/test.mp3"];
