@@ -1,0 +1,61 @@
+<html>
+	<head>
+		<title>Sound Keyboard</title>
+		<script type="text/javascript" src="audio.js"></script>
+                <script type="text/javascript" src="helpers/buffer-loader.js"></script>
+                <script type="text/javascript" src="helpers/characters.js"></script>
+                <script type="text/javascript" src="helpers/notes.js"></script>
+		<link href="helpers/css/jquery.spellchecker.css" rel="stylesheet" />
+                <script src="../../../helpers/jquery-1.8.2.min.js"></script>
+		<script src="helpers/js/jquery.spellchecker.min.js"></script>
+		<script src="helpers/js/jquery.spellchecker.js"></script>
+	</head>
+	<body>
+		<div style="text-align: center">
+			<h1>Type your words correctly for a wonderful sound!</h1>
+			<form method="post" action="">
+                                <textarea spellcheck="true" id="musicwords" style="width:90%; height:90%"></textarea>
+			</form>
+		</div>
+		<script type="text/javascript">
+			(function() {
+			  var element = $('#musicwords');
+
+                          // Init the text spellchecker
+                          var spellchecker = new $.SpellChecker(element, {
+                            lang: 'en',
+                            parser: 'text',
+                            webservice: {
+                              path: 'helpers/webservices/php/spellchecker.php',
+                              driver: 'google'
+                            },
+                            suggestBox: {
+                              position: 'above'
+                            },
+                            incorrectWords: {
+                              container: '#incorrect-word-list'
+                            }
+                          });
+
+                          // Bind spellchecker handler functions
+                          spellchecker.on('check.fail', function() {
+                            alert('You mispelled a word :(');
+                            if (musicOn) toggleMusic();
+                          });
+
+                          spellchecker.on('check.success', function() {
+                            if (!musicOn) toggleMusic();
+                          });
+
+                          // Check the spelling
+                          $("#musicwords").keypress(function(e){
+                            if (convertToString() == " " || convertToString() == '\n') spellchecker.check();
+                          });
+                          element.attr("spellcheck", "true");
+                          // Here are the available spelling functions
+                          // check.start, check.fail, check.success, check.complete, replace.word.before, replace.word, select.word
+                        })();
+		</script>
+	</body>
+</html>
+

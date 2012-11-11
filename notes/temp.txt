@@ -1,0 +1,1 @@
+Put music files in this directory and then run ./generate_notes_array.py
